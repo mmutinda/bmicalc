@@ -43,11 +43,11 @@ app.post('/bmi-calc', function(request, response) {
     * Weight Height 
     */
 
-    const requestDataStr = request.body;
-    const requestData = JSON.parse(requestDataStr);
+//    console.log(request.params);
+//    console.log(request.query);
 
-    const height = requestData.height;
-    const weight = requestData.weight;
+    const height = request.body.height;
+    const weight = request.body.weight;
 
     const h2 = height * height;
     const b = weight /  h2;
