@@ -36,10 +36,34 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 
-app.get('/test', function(request, response) {
+app.post('/bmi-calc', function(request, response) {
 
-    console.log('am at test!')
-    response.json({ name : 'mike'});
+    // parameters 
+    /*
+    * Weight Height 
+    */
+
+    const requestDataStr = request.body;
+    const requestData = JSON.parse(requestDataStr);
+
+    const height = requestData.height;
+    const weight = requestData.weight;
+
+    const h2 = height * height;
+    const b = weight /  h2;
+
+    let message = ``;
+    if (b > 30) {
+        message = `Obese`;
+    } else if (b > 25) {
+        message = `Overweight`;
+    } else if (b > 18.5) {
+        message = `Healthy`;
+    } else {
+        message = `Underweight`;
+    }
+
+    response.json({ bmi: b, message });
 })
 
 if (configs.env === 'prod') {
